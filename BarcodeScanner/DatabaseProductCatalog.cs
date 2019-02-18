@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Data.Sqlite;
 
 namespace BarcodeScanner
@@ -10,6 +11,9 @@ namespace BarcodeScanner
             
         public static void CreateDatabase()
         {
+            if (File.Exists("products.db"))
+                return;
+                    
             using (var connection = new SqliteConnection(ConnectionString))
             {
                 connection.Open();
@@ -29,6 +33,9 @@ namespace BarcodeScanner
 
                 foreach (var product in products)
                 {
+                    using (var command = new SqliteCommand("DELETE FROM Products", connection))
+                        command.ExecuteNonQuery();
+                    
                     using (var command = new SqliteCommand("INSERT INTO Products(Barcode, Name, Price) VALUES(@barcode, @name, @price)", connection))
                     {
                         command.Parameters.AddWithValue("@barcode", product.Barcode);
