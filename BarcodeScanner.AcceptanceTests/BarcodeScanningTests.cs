@@ -56,7 +56,7 @@ namespace BarcodeScanner.AcceptanceTests
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        public async Task AssertContentEquals<T>(HttpContent content, T expected)
+        private async Task AssertContentEquals<T>(HttpContent content, T expected)
         {
             var actual = await content.ReadAsJsonAsync<T>();
             Assert.Equal(expected, actual);
