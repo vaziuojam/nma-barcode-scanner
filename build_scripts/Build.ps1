@@ -1,1 +1,1 @@
-Exec { dotnet build }
+Invoke-Expression "dotnet build"
