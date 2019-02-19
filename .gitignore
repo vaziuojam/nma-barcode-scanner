@@ -30,6 +30,7 @@ bld/
 [Oo]ut/
 msbuild.log
 msbuild.err
+artifacts/
 msbuild.wrn
 
 # Visual Studio 2015
